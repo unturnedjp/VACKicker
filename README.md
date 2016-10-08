@@ -1,9 +1,9 @@
 VAC食らってる人を蹴るプラグイン  
-  
-ちなみに日本語にすると文字化けして何を言ってるのかわからなくなります  
-Unturned鯖の仕様だと思うので日本語化はやめといた方が良いかと
+まだバグとかあるかもしれない
 
-DOWNLOAD : http://dl.unturned.jp/plugins/VACKicker/VACKicker.zip (準備中)
+ちなみに日本語にすると文字化けして何を言ってるのかわからなくなります  
+
+DOWNLOAD : http://dl.unturned.jp/plugins/VACKicker/VACKicker.zip
     
                                                    ,:
                                                  ,' |
