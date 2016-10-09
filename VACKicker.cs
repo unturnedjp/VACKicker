@@ -13,7 +13,7 @@ namespace VACKicker
         protected override void Load()
         {
             Instance = this;
-            if (Instance.Configuration.Instance.Enabled)
+            if (Instance.Configuration.Instance.Enable)
             {
                 Logger.LogWarning("================================");
                 Logger.LogWarning("|     VACKicker : Enable       |");
@@ -31,7 +31,7 @@ namespace VACKicker
 
         protected override void Unload()
         {
-            if (Instance.Configuration.Instance.Enabled)
+            if (Instance.Configuration.Instance.Enable)
             {
                 U.Events.OnBeforePlayerConnected -= OnBeforePlayerConnected;
             }
