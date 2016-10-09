@@ -18,7 +18,7 @@ namespace VACKicker
                 Logger.LogWarning("================================");
                 Logger.LogWarning("|     VACKicker : Enable       |");
                 Logger.LogWarning("================================");
-                U.Events.OnBeforePlayerConnected += OnBeforePlayerConnected;
+                U.Events.OnPlayerConnected += OnPlayerConnected;
             }
             else
             {
@@ -33,7 +33,7 @@ namespace VACKicker
         {
             if (Instance.Configuration.Instance.Enable)
             {
-                U.Events.OnBeforePlayerConnected -= OnBeforePlayerConnected;
+                U.Events.OnBeforePlayerConnected -= OnPlayerConnected;
             }
         }
         public override TranslationList DefaultTranslations
@@ -51,7 +51,7 @@ namespace VACKicker
             }
         }
 
-        public void OnBeforePlayerConnected(UnturnedPlayer player)
+        public void OnPlayerConnected(UnturnedPlayer player)
         {
             bool? vacStatus = player.SteamProfile.IsVacBanned;
 
