@@ -1,7 +1,7 @@
 VAC食らってる人を蹴るプラグイン  
 まだバグとかあるかもしれない
 
-ちなみに日本語にすると文字化けして何を言ってるのかわからなくなります  
+ちなみに日本語化すると文字化けして何を言ってるのかわからなくなります  
 
 DOWNLOAD : http://dl.unturned.jp/plugins/VACKicker/VACKicker.zip
     
