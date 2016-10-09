@@ -9,7 +9,7 @@ namespace VACKicker
 
         public void LoadDefaults()
         {
-            Enabled = true;
+            Enable = true;
             Errorkick = false;
         }
     }
