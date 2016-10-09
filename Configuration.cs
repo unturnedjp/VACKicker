@@ -4,7 +4,7 @@ namespace VACKicker
 {
     public class Configuration : IRocketPluginConfiguration
     {
-        public bool Enabled;
+        public bool Enable;
         public bool Errorkick;
 
         public void LoadDefaults()
