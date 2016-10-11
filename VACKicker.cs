@@ -10,9 +10,11 @@ namespace VACKicker
     public class VACKicker : RocketPlugin<Configuration>
     {
         public static VACKicker Instance;
+
         protected override void Load()
         {
             Instance = this;
+
             if (Instance.Configuration.Instance.Enable)
             {
                 Logger.LogWarning("================================");
@@ -33,7 +35,7 @@ namespace VACKicker
         {
             if (Instance.Configuration.Instance.Enable)
             {
-                U.Events.OnBeforePlayerConnected -= OnPlayerConnected;
+                U.Events.OnPlayerConnected -= OnPlayerConnected;
             }
         }
         public override TranslationList DefaultTranslations
