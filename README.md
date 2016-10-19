@@ -3,7 +3,7 @@ VAC食らってる人を蹴るプラグイン
 
 ちなみに日本語化すると文字化けして何を言ってるのかわからなくなります  
 
-DOWNLOAD : http://dl.unturned.jp/plugins/VACKicker/VACKicker.zip
+DOWNLOAD : https://dev.rocketmod.net/plugins/vackicker/
     
                                                    ,:
                                                  ,' |
