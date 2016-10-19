@@ -4,7 +4,6 @@ using Rocket.Core.Plugins;
 using Rocket.Unturned;
 using Rocket.Unturned.Player;
 
-
 namespace VACKicker
 {
     public class VACKicker : RocketPlugin<Configuration>
@@ -20,7 +19,7 @@ namespace VACKicker
                 Logger.LogWarning("================================");
                 Logger.LogWarning("|     VACKicker : Enable       |");
                 Logger.LogWarning("================================");
-                U.Events.OnPlayerConnected += OnPlayerConnected;
+                U.Events.OnPlayerConnected += Events_OnPlayerConnected;
             }
             else
             {
@@ -35,9 +34,10 @@ namespace VACKicker
         {
             if (Instance.Configuration.Instance.Enable)
             {
-                U.Events.OnPlayerConnected -= OnPlayerConnected;
+                U.Events.OnPlayerConnected -= Events_OnPlayerConnected;
             }
         }
+
         public override TranslationList DefaultTranslations
         {
             get
@@ -45,35 +45,31 @@ namespace VACKicker
                 return new TranslationList()
                 {
                     {"kick_reason", "VACKicker has kicked"},
-                    {"vacStatus_true", "VACKicker -> {0} ({1}) : kicked"},
-                    {"vacStatus_false", "VACKicker -> {0} ({1}) : No VAC record"},
-                    {"vacStatus_null", "VACKicker -> {0} ({1}) : Null"},
+                    {"vacStatus_true", "{0} ({1}) : kicked"},
+                    {"vacStatus_false", "{0} ({1}) : No VAC record"},
+                    {"vacStatus_null", "VACKicker >> {0} ({1}) : Null"},
                     {"error_reason", "Oops!... VACKicker ERROR!!"}
                 };
             }
         }
-
-        public void OnPlayerConnected(UnturnedPlayer player)
+        
+        private void Events_OnPlayerConnected(UnturnedPlayer player)
         {
             bool? vacStatus = player.SteamProfile.IsVacBanned;
 
-            if (vacStatus == true)
-            {
-                player.Kick(Translate("kick_reason"));
-                Logger.LogWarning(Translate("vacStatus_true", player.DisplayName, player.Id));
-            }
-            else if (vacStatus == false)
-            {
-                Logger.LogWarning(Translate("vacStatus_false", player.DisplayName, player.Id));
-            }
-            else if(Instance.Configuration.Instance.Errorkick && vacStatus == null)
+            if (Instance.Configuration.Instance.Errorkick && (!(vacStatus.HasValue)))
             {
                 player.Kick(Translate("error_reason"));
                 Logger.LogError(Translate("vacStatus_null", player.DisplayName, player.Id));
             }
-            else
+            else if (!(vacStatus.HasValue))
             {
                 Logger.LogError(Translate("vacStatus_null", player.DisplayName, player.Id));
+            }
+            else
+            {
+                if ((bool)vacStatus) { player.Kick(Translate("kick_reason")); }
+                Logger.Log(Translate((bool)vacStatus ? "vacStatus_true" : "vacStatus_false", player.DisplayName, player.Id));
             }
         }
     }
