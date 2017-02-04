@@ -14,7 +14,7 @@ namespace VACKicker
         {
             Instance = this;
 
-            if (Instance.Configuration.Instance.Enable)
+            if (Instance.Configuration.Instance.Enabled)
             {
                 Logger.LogWarning("================================");
                 Logger.LogWarning("|     VACKicker : Enable       |");
@@ -32,7 +32,7 @@ namespace VACKicker
 
         protected override void Unload()
         {
-            if (Instance.Configuration.Instance.Enable)
+            if (Instance.Configuration.Instance.Enabled)
             {
                 U.Events.OnPlayerConnected -= Events_OnPlayerConnected;
             }

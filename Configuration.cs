@@ -4,12 +4,12 @@ namespace VACKicker
 {
     public class Configuration : IRocketPluginConfiguration
     {
-        public bool Enable;
+        public bool Enabled;
         public bool Errorkick;
 
         public void LoadDefaults()
         {
-            Enable = true;
+            Enabled = true;
             Errorkick = false;
         }
     }
