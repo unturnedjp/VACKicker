@@ -31,23 +31,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>D:\SteamLibrary\steamapps\common\Unturned\Unturned_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>lib\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>D:\SteamLibrary\steamapps\common\Unturned\Unturned_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>lib\Assembly-CSharp-firstpass.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Rocket.API">
-      <HintPath>E:\kouwa\Desktop\Unturned\Unturned_1162\Unturned\Modules\Rocket.Unturned\Rocket.API.dll</HintPath>
+      <HintPath>lib\Rocket.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Rocket.Core">
-      <HintPath>E:\kouwa\Desktop\Unturned\Unturned_1162\Unturned\Modules\Rocket.Unturned\Rocket.Core.dll</HintPath>
+      <HintPath>lib\Rocket.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Rocket.Unturned">
-      <HintPath>E:\kouwa\Desktop\Unturned\Unturned_1162\Unturned\Modules\Rocket.Unturned\Rocket.Unturned.dll</HintPath>
+      <HintPath>lib\Rocket.Unturned.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -57,7 +57,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>D:\SteamLibrary\steamapps\common\Unturned\Unturned_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>lib\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
