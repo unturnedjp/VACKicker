@@ -2,7 +2,10 @@
 using Rocket.Core.Logging;
 using Rocket.Core.Plugins;
 using Rocket.Unturned;
+using Rocket.Unturned.Permissions;
 using Rocket.Unturned.Player;
+using SDG.Unturned;
+using Steamworks;
 
 namespace VACKicker
 {
@@ -17,24 +20,23 @@ namespace VACKicker
             if (Instance.Configuration.Instance.Enabled)
             {
                 Logger.LogWarning("================================");
-                Logger.LogWarning("|     VACKicker : Enable       |");
+                Logger.LogWarning("|     VACKicker : Enabled      |");
                 Logger.LogWarning("================================");
-                U.Events.OnPlayerConnected += Events_OnPlayerConnected;
+                UnturnedPermissions.OnJoinRequested += Events_OnJoinRequested;
             }
             else
             {
                 Logger.LogWarning("================================");
-                Logger.LogWarning("|     VACKicker : Disable      |");
+                Logger.LogWarning("|     VACKicker : Disabled     |");
                 Logger.LogWarning("================================");
             }
-            
         }
 
         protected override void Unload()
         {
             if (Instance.Configuration.Instance.Enabled)
             {
-                U.Events.OnPlayerConnected -= Events_OnPlayerConnected;
+                UnturnedPermissions.OnJoinRequested -= Events_OnJoinRequested;
             }
         }
 
@@ -44,32 +46,31 @@ namespace VACKicker
             {
                 return new TranslationList()
                 {
-                    {"kick_reason", "VACKicker has kicked"},
                     {"vacStatus_true", "{0} ({1}) : kicked"},
                     {"vacStatus_false", "{0} ({1}) : No VAC record"},
                     {"vacStatus_null", "VACKicker >> {0} ({1}) : Null"},
-                    {"error_reason", "Oops!... VACKicker ERROR!!"}
                 };
             }
         }
         
-        private void Events_OnPlayerConnected(UnturnedPlayer player)
+        private void Events_OnJoinRequested(CSteamID player, ref ESteamRejection? rejection)
         {
-            bool? vacStatus = player.SteamProfile.IsVacBanned;
+            UnturnedPlayer user = UnturnedPlayer.FromCSteamID(player);
+            bool? vacStatus = user.SteamProfile.IsVacBanned;
 
             if (Instance.Configuration.Instance.Errorkick && (!(vacStatus.HasValue)))
             {
-                player.Kick(Translate("error_reason"));
-                Logger.LogError(Translate("vacStatus_null", player.DisplayName, player.Id));
+                rejection = ESteamRejection.PLUGIN;
+                Logger.LogError(Translate("vacStatus_null", user.DisplayName, player));
             }
             else if (!(vacStatus.HasValue))
             {
-                Logger.LogError(Translate("vacStatus_null", player.DisplayName, player.Id));
+                Logger.LogError(Translate("vacStatus_null", user.DisplayName, player));
             }
             else
             {
-                if ((bool)vacStatus) { player.Kick(Translate("kick_reason")); }
-                Logger.Log(Translate((bool)vacStatus ? "vacStatus_true" : "vacStatus_false", player.DisplayName, player.Id));
+                if ((bool)vacStatus) { rejection = ESteamRejection.AUTH_VAC_BAN; }
+                Logger.Log(Translate((bool)vacStatus ? "vacStatus_true" : "vacStatus_false", user.DisplayName, player));
             }
         }
     }
