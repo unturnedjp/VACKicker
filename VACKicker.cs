@@ -1,7 +1,7 @@
 ﻿using Rocket.API.Collections;
 using Rocket.Core.Logging;
 using Rocket.Core.Plugins;
-using Rocket.Unturned;
+using Rocket.Core.Steam;
 using Rocket.Unturned.Permissions;
 using Rocket.Unturned.Player;
 using SDG.Unturned;
@@ -52,25 +52,27 @@ namespace VACKicker
                 };
             }
         }
-        
+
         private void Events_OnJoinRequested(CSteamID player, ref ESteamRejection? rejection)
         {
-            UnturnedPlayer user = UnturnedPlayer.FromCSteamID(player);
-            bool? vacStatus = user.SteamProfile.IsVacBanned;
+            Profile SteamProfile = new Profile(ulong.Parse(player.ToString()));
+            bool? vacStatus = SteamProfile.IsVacBanned;
+
+            string name = SteamProfile.SteamID;
 
             if (Instance.Configuration.Instance.Errorkick && (!(vacStatus.HasValue)))
             {
                 rejection = ESteamRejection.PLUGIN;
-                Logger.LogError(Translate("vacStatus_null", user.DisplayName, player));
+                Logger.LogError(Translate("vacStatus_null", name, player));
             }
             else if (!(vacStatus.HasValue))
             {
-                Logger.LogError(Translate("vacStatus_null", user.DisplayName, player));
+                Logger.LogError(Translate("vacStatus_null", name, player));
             }
             else
             {
                 if ((bool)vacStatus) { rejection = ESteamRejection.AUTH_VAC_BAN; }
-                Logger.Log(Translate((bool)vacStatus ? "vacStatus_true" : "vacStatus_false", user.DisplayName, player));
+                Logger.Log(Translate((bool)vacStatus ? "vacStatus_true" : "vacStatus_false", name, player));
             }
         }
     }
